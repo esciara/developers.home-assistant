@@ -6,7 +6,7 @@ branch: claude/home-assistant-integration-skill-01T9LctSUCa3AjQpfkMro4yC
 repository: developers.home-assistant
 topic: "Home Assistant Integration Development Skill - Implementation Plan"
 tags: [plan, claude-skills, home-assistant, integration-development, progressive-disclosure]
-status: ready
+status: complete
 related_research: thoughts/shared/research/2025-11-20-home-assistant-integration-development.md
 ---
 
