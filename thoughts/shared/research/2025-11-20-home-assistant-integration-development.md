@@ -5,10 +5,11 @@ git_commit: cfe3dab398c272ae5271f086dc05ab2d7488bdcf
 branch: claude/home-assistant-integration-skill-01T9LctSUCa3AjQpfkMro4yC
 repository: developers.home-assistant
 topic: "Home Assistant Integration Development - Documentation for Claude Code Skill Creation"
-tags: [research, codebase, home-assistant, integration-development, best-practices, testing, quality-scale]
+tags: [research, codebase, home-assistant, integration-development, best-practices, testing, quality-scale, claude-skills]
 status: complete
-last_updated: 2025-11-20
+last_updated: 2025-11-20T23:05:11+00:00
 last_updated_by: Claude
+last_updated_note: "Added comprehensive Claude Code Skills best practices section and updated recommendations for skill creation"
 ---
 
 # Research: Home Assistant Integration Development - Documentation for Claude Code Skill Creation
@@ -25,8 +26,9 @@ This repository contains all the developer documentation for the Home Assistant 
 
 ## Summary
 
-Home Assistant provides comprehensive developer documentation covering the entire integration development lifecycle. The documentation is organized into several key areas:
+Home Assistant provides comprehensive developer documentation covering the entire integration development lifecycle. This research combines that documentation with Claude Code Skills best practices to enable creation of an effective development skill.
 
+**Home Assistant Documentation Coverage**:
 1. **Getting Started & Scaffolding**: Quick-start tools and file structure requirements
 2. **Core Concepts**: Architecture, asyncio patterns, events, services, states
 3. **Configuration System**: Config entries, config flows, data entry flows
@@ -36,7 +38,16 @@ Home Assistant provides comprehensive developer documentation covering the entir
 7. **Code Review & Quality**: Style guides, validation, quality scale tiers (Bronze-Platinum)
 8. **Best Practices**: Development guidelines, common pitfalls, submission standards
 
-The documentation is well-structured and provides both conceptual understanding and practical implementation patterns.
+**Claude Code Skills Best Practices**:
+- Model-invoked activation via description triggers
+- SKILL.md file structure with YAML frontmatter
+- Progressive disclosure with supporting files
+- Tool access restrictions with allowed-tools
+- Focused, single-capability design
+- Clear testing and debugging guidance
+- Team sharing via project skills or plugins
+
+The research provides a complete blueprint for creating a Claude Code Skill that guides developers through Home Assistant integration development following all documented best practices.
 
 ## Detailed Findings
 
@@ -817,6 +828,438 @@ Based on all documentation:
 
 10. **Small PR Philosophy**: Large PRs are discouraged. Single platform per PR for new integrations. Focus beats scope.
 
+## Claude Code Skills - Best Practices for Skill Development
+
+### What are Agent Skills?
+
+Agent Skills package expertise into discoverable capabilities. Each Skill consists of a `SKILL.md` file with instructions that Claude reads when relevant, plus optional supporting files like scripts and templates.
+
+**Key Characteristics**:
+- **Model-invoked**: Claude autonomously decides when to use Skills based on the user's request and the Skill's description
+- **Discoverable**: Skills are automatically found from personal (`~/.claude/skills/`), project (`.claude/skills/`), and plugin locations
+- **Modular**: Each Skill addresses one focused capability
+- **Composable**: Multiple Skills can work together for complex tasks
+
+**Benefits**:
+- Extend Claude's capabilities for specific workflows
+- Share expertise across teams via git
+- Reduce repetitive prompting
+- Consistent best practices enforcement
+
+### Skill Types & Storage
+
+**Personal Skills** (`~/.claude/skills/`):
+- Available across all projects
+- Individual workflows and preferences
+- Experimental Skills during development
+- Personal productivity tools
+
+**Project Skills** (`.claude/skills/`):
+- Shared with team via git
+- Team workflows and conventions
+- Project-specific expertise
+- Shared utilities and scripts
+- Automatically available to team members
+
+**Plugin Skills**:
+- Bundled with Claude Code plugins
+- Automatically available when plugin installed
+- Distributed through marketplaces
+- Recommended for team sharing
+
+### SKILL.md File Structure
+
+**Required Format**:
+```yaml
+---
+name: skill-name
+description: Brief description of what this Skill does and when to use it
+---
+
+# Skill Name
+
+## Instructions
+Provide clear, step-by-step guidance for Claude.
+
+## Examples
+Show concrete examples of using this Skill.
+```
+
+**Field Requirements**:
+- `name`: Lowercase letters, numbers, hyphens only (max 64 chars)
+- `description`: What the Skill does and when to use it (max 1024 chars)
+
+**Optional Frontmatter Fields**:
+- `allowed-tools`: List of tools Claude can use without asking permission (Claude Code only)
+
+### Description Field - Critical for Discovery
+
+The `description` field determines when Claude uses your Skill. **It must include both what the Skill does AND when to use it.**
+
+**Too Vague**:
+```yaml
+description: Helps with documents
+```
+
+**Specific and Discoverable**:
+```yaml
+description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
+```
+
+**Best Practices**:
+- Include key terms users would mention
+- Specify file types, operations, and use cases
+- Mention specific triggers (e.g., "when working with Excel", "for PDF processing")
+- Be concrete about capabilities
+
+### Supporting Files Organization
+
+```
+skill-name/
+├── SKILL.md (required)
+├── reference.md (optional documentation)
+├── examples.md (optional examples)
+├── scripts/
+│   └── helper.py (optional utility)
+└── templates/
+    └── template.txt (optional template)
+```
+
+**Progressive Disclosure**: Claude reads supporting files only when needed, managing context efficiently.
+
+**Referencing Supporting Files**:
+````markdown
+For advanced usage, see [reference.md](reference.md).
+
+Run the helper script:
+```bash
+python scripts/helper.py input.txt
+```
+````
+
+### Tool Access Restrictions with allowed-tools
+
+Use `allowed-tools` to limit which tools Claude can use when a Skill is active:
+
+```yaml
+---
+name: safe-file-reader
+description: Read files without making changes. Use when you need read-only file access.
+allowed-tools: Read, Grep, Glob
+---
+```
+
+**When to Use**:
+- Read-only Skills that shouldn't modify files
+- Skills with limited scope (e.g., only data analysis)
+- Security-sensitive workflows requiring restricted capabilities
+
+**Default Behavior**: If `allowed-tools` is not specified, Claude asks for permission to use tools following the standard permission model.
+
+### Skill Best Practices
+
+#### 1. Keep Skills Focused
+
+One Skill should address one capability:
+
+**Focused** (Good):
+- "PDF form filling"
+- "Excel data analysis"
+- "Git commit messages"
+
+**Too Broad** (Bad):
+- "Document processing" (split into separate Skills)
+- "Data tools" (split by data type or operation)
+
+#### 2. Write Clear Instructions
+
+**Structure**:
+1. Quick start - Most common use case
+2. Step-by-step guidance
+3. Examples with real code
+4. Best practices
+5. Common pitfalls to avoid
+
+**Example Structure**:
+````markdown
+# Skill Name
+
+## Quick start
+[Most common 80% use case with copy-paste example]
+
+## Instructions
+1. First step with clear action
+2. Second step with expected outcome
+3. Third step with validation
+
+## Examples
+```python
+# Concrete, runnable example
+```
+
+## Best practices
+- Do this
+- Don't do that
+````
+
+#### 3. Include Specific Triggers
+
+Help Claude discover when to use Skills:
+
+**Clear**:
+```yaml
+description: Analyze Excel spreadsheets, create pivot tables, and generate charts. Use when working with Excel files, spreadsheets, or analyzing tabular data in .xlsx format.
+```
+
+**Vague**:
+```yaml
+description: For files
+```
+
+#### 4. Document Dependencies
+
+List required packages in the description:
+
+```yaml
+description: Extract text, fill forms, merge PDFs. Use when working with PDF files, forms, or document extraction. Requires pypdf and pdfplumber packages.
+```
+
+**Note**: Packages must be installed in the user's environment before Claude can use them. Claude will ask for permission to install dependencies if needed.
+
+#### 5. Version Your Skills
+
+Track changes with version history in SKILL.md content:
+
+```markdown
+## Version History
+- v2.0.0 (2025-10-01): Breaking changes to API
+- v1.1.0 (2025-09-15): Added new features
+- v1.0.0 (2025-09-01): Initial release
+```
+
+### Testing and Debugging Skills
+
+#### Testing a Skill
+
+After creating a Skill, test it by asking questions that match your description:
+
+```
+Can you help me extract text from this PDF?
+```
+
+Claude autonomously decides to use your Skill if it matches the request—you don't need to explicitly invoke it.
+
+#### Debugging Common Issues
+
+**1. Claude doesn't use my Skill**
+
+Check:
+- Is the description specific enough with key trigger terms?
+- Is the file at the correct path (`~/.claude/skills/skill-name/SKILL.md` or `.claude/skills/skill-name/SKILL.md`)?
+- Is the YAML frontmatter valid (opening/closing `---`, no tabs, correct indentation)?
+
+Run with debug mode:
+```bash
+claude --debug
+```
+
+**2. Skill has errors**
+
+Check:
+- Are dependencies available/installable?
+- Do scripts have execute permissions? (`chmod +x scripts/*.py`)
+- Are file paths using forward slashes (Unix style)? `scripts/helper.py` not `scripts\helper.py`
+
+**3. Multiple Skills conflict**
+
+Use distinct trigger terms in descriptions:
+
+Instead of:
+```yaml
+# Skill 1
+description: For data analysis
+
+# Skill 2
+description: For analyzing data
+```
+
+Use:
+```yaml
+# Skill 1
+description: Analyze sales data in Excel files and CRM exports. Use for sales reports, pipeline analysis, and revenue tracking.
+
+# Skill 2
+description: Analyze log files and system metrics data. Use for performance monitoring, debugging, and system diagnostics.
+```
+
+### Skill Examples
+
+#### Simple Single-File Skill
+
+```
+commit-helper/
+└── SKILL.md
+```
+
+```yaml
+---
+name: generating-commit-messages
+description: Generates clear commit messages from git diffs. Use when writing commit messages or reviewing staged changes.
+---
+
+# Generating Commit Messages
+
+## Instructions
+
+1. Run `git diff --staged` to see changes
+2. I'll suggest a commit message with:
+   - Summary under 50 characters
+   - Detailed description
+   - Affected components
+
+## Best practices
+
+- Use present tense
+- Explain what and why, not how
+```
+
+#### Skill with Tool Permissions
+
+```
+code-reviewer/
+└── SKILL.md
+```
+
+```yaml
+---
+name: code-reviewer
+description: Review code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.
+allowed-tools: Read, Grep, Glob
+---
+
+# Code Reviewer
+
+## Review checklist
+
+1. Code organization and structure
+2. Error handling
+3. Performance considerations
+4. Security concerns
+5. Test coverage
+
+## Instructions
+
+1. Read the target files using Read tool
+2. Search for patterns using Grep
+3. Find related files using Glob
+4. Provide detailed feedback on code quality
+```
+
+#### Multi-File Skill
+
+```
+pdf-processing/
+├── SKILL.md
+├── FORMS.md
+├── REFERENCE.md
+└── scripts/
+    ├── fill_form.py
+    └── validate.py
+```
+
+**SKILL.md**:
+````yaml
+---
+name: pdf-processing
+description: Extract text, fill forms, merge PDFs. Use when working with PDF files, forms, or document extraction. Requires pypdf and pdfplumber packages.
+---
+
+# PDF Processing
+
+## Quick start
+
+Extract text:
+```python
+import pdfplumber
+with pdfplumber.open("doc.pdf") as pdf:
+    text = pdf.pages[0].extract_text()
+```
+
+For form filling, see [FORMS.md](FORMS.md).
+For detailed API reference, see [REFERENCE.md](REFERENCE.md).
+
+## Requirements
+
+Packages must be installed in your environment:
+```bash
+pip install pypdf pdfplumber
+```
+````
+
+### Sharing Skills with Your Team
+
+**Recommended Approach**: Distribute Skills through plugins.
+
+**Alternative - Project Repository**:
+1. Create project Skill in `.claude/skills/team-skill/`
+2. Commit to git:
+   ```bash
+   git add .claude/skills/
+   git commit -m "Add team Skill for integration development"
+   git push
+   ```
+3. Team members automatically get Skills when they pull:
+   ```bash
+   git pull
+   claude  # Skills are now available
+   ```
+
+### Skill Lifecycle Management
+
+**Update a Skill**:
+```bash
+# Edit directly
+code ~/.claude/skills/my-skill/SKILL.md  # Personal
+code .claude/skills/my-skill/SKILL.md     # Project
+
+# Restart Claude Code to load changes
+```
+
+**Remove a Skill**:
+```bash
+# Personal
+rm -rf ~/.claude/skills/my-skill
+
+# Project
+rm -rf .claude/skills/my-skill
+git commit -m "Remove unused Skill"
+```
+
+**View Available Skills**:
+Ask Claude directly:
+```
+What Skills are available?
+```
+
+or
+
+```
+List all available Skills
+```
+
+### Key Takeaways for Skill Development
+
+1. **Model-Invoked**: Claude decides when to use Skills based on description
+2. **Description is Critical**: Must include what it does AND when to use it
+3. **Keep Focused**: One Skill = One capability
+4. **Specific Triggers**: Include key terms users would mention
+5. **Progressive Disclosure**: Supporting files loaded only when needed
+6. **Tool Restrictions**: Use `allowed-tools` for read-only or limited-scope Skills
+7. **Test with Real Queries**: Ask questions that should trigger your Skill
+8. **Version History**: Document changes for team visibility
+9. **Share via Git**: Project Skills or plugins for team distribution
+10. **Debug Mode**: Use `claude --debug` to troubleshoot loading issues
+
 ## Open Questions
 
 1. **Skill Scope**: Should the skill cover all integration types or focus on common patterns (hub, device, service)?
@@ -841,42 +1284,292 @@ Based on all documentation:
 
 ## Recommendations for Skill Creation
 
-Based on this research, a Claude Code skill for Home Assistant integration development should:
+Based on this research combining Home Assistant integration development best practices with Claude Code Skills patterns, here are comprehensive recommendations:
 
-1. **Start with Scaffold**: Leverage the existing `script.scaffold` tool as foundation
-2. **Focus on Config Entries**: All new integrations use config entries, not YAML
-3. **Coordinator Pattern**: Default to DataUpdateCoordinator for polling APIs
-4. **Bronze Tier Minimum**: Target Bronze quality scale as baseline
-5. **Testing First**: Generate test files alongside implementation files
-6. **External Library Check**: Verify/remind about PyPI library requirement
-7. **Validation Loop**: Run hassfest and pre-commit before completion
-8. **Incremental Approach**: Start with simple integration types (service, device) before complex (hub)
-9. **Best Practices Enforcement**: Embed common pitfalls as validation checks
-10. **Documentation Integration**: Generate strings.json and services.yaml alongside code
+### Skill Design Principles
 
-**Suggested Skill Workflow**:
-1. Gather requirements (domain, type, IoT class, API library)
-2. Run scaffold tool
-3. Customize manifest.json
-4. Implement config flow with validation
-5. Create coordinator (if polling)
-6. Implement platform entities
-7. Generate service definitions
-8. Create comprehensive tests
-9. Run validation tools (hassfest, pre-commit, pytest)
-10. Generate documentation templates
+1. **Model-Invoked Activation**: Write a description that includes specific triggers like "Home Assistant integration", "HA integration", "custom component", "manifest.json", "config flow"
+2. **Keep Focused**: One Skill for the core integration development workflow
+3. **Progressive Disclosure**: Reference supporting files for advanced topics (device automations, diagnostics, translations)
+4. **Tool Access**: Consider using `allowed-tools` if appropriate (e.g., for read-only analysis phases)
 
-**Key Files to Generate**:
+### Recommended Skill Description
+
+```yaml
+description: Create Home Assistant integrations following official best practices. Use when developing Home Assistant integrations, custom components, creating manifest.json, implementing config flows, or working with Home Assistant's integration architecture. Guides through scaffolding, config entries, coordinators, entities, testing, and quality standards.
+```
+
+This description includes key triggers:
+- "Home Assistant integrations"
+- "custom components"
+- "manifest.json"
+- "config flows"
+- Specific technical terms developers would use
+
+### Skill Structure Recommendation
+
+```
+home-assistant-integration/
+├── SKILL.md (main workflow and quick start)
+├── MANIFEST_GUIDE.md (manifest.json detailed reference)
+├── CONFIG_FLOW_GUIDE.md (config flow patterns)
+├── ENTITY_GUIDE.md (entity development)
+├── TESTING_GUIDE.md (testing requirements)
+├── QUALITY_SCALE.md (quality tier checklist)
+└── templates/
+    ├── manifest.json
+    ├── __init__.py
+    ├── config_flow.py
+    ├── coordinator.py
+    └── test_config_flow.py
+```
+
+### SKILL.md Structure
+
+````markdown
+---
+name: home-assistant-integration-development
+description: Create Home Assistant integrations following official best practices. Use when developing Home Assistant integrations, custom components, creating manifest.json, implementing config flows, or working with Home Assistant's integration architecture. Guides through scaffolding, config entries, coordinators, entities, testing, and quality standards.
+---
+
+# Home Assistant Integration Development
+
+## Quick Start
+
+The fastest way to create a new integration:
+
+```bash
+python3 -m script.scaffold integration
+```
+
+This generates complete file structure with config flow, tests, and translations.
+
+## Development Workflow
+
+1. **Gather Requirements**
+   - Integration domain (unique, lowercase, underscores)
+   - Integration type (device, hub, service, helper)
+   - IoT class (local_polling, local_push, cloud_polling, cloud_push)
+   - External API library name (must be on PyPI)
+
+2. **Run Scaffold Tool**
+   ```bash
+   python3 -m script.scaffold integration
+   # Follow prompts for domain, name, type
+   ```
+
+3. **Customize manifest.json**
+   - See [MANIFEST_GUIDE.md](MANIFEST_GUIDE.md) for all required fields
+   - Must pin all requirement versions: `"requirements": ["library==1.0.0"]`
+   - Set quality_scale: "bronze" minimum
+
+4. **Implement Config Flow**
+   - See [CONFIG_FLOW_GUIDE.md](CONFIG_FLOW_GUIDE.md) for patterns
+   - 100% test coverage required
+   - Must include unique_id handling
+   - Implement reauth and reconfigure flows
+
+5. **Create DataUpdateCoordinator** (if polling API)
+   - Centralized polling for all entities
+   - Automatic error handling
+   - Context-aware fetching
+
+6. **Implement Platform Entities**
+   - See [ENTITY_GUIDE.md](ENTITY_GUIDE.md)
+   - Must set `has_entity_name = True`
+   - Must provide unique_id for registry
+   - Must include device_info for device registry
+
+7. **Write Comprehensive Tests**
+   - See [TESTING_GUIDE.md](TESTING_GUIDE.md)
+   - 100% config flow coverage mandatory
+   - Test all flows: user, reauth, reconfigure
+   - Use core interfaces, not integration internals
+
+8. **Run Validation Tools**
+   ```bash
+   python3 -m script.hassfest        # Validate manifest
+   ruff format                        # Code formatting
+   pre-commit run --all-files         # All linters
+   pytest tests/components/<domain>/  # Run tests
+   ```
+
+9. **Quality Scale Check**
+   - See [QUALITY_SCALE.md](QUALITY_SCALE.md)
+   - Bronze tier minimum for new integrations
+
+## Critical Requirements
+
+### Must Do
+- ✅ All API code in external PyPI library
+- ✅ Config flow support (UI setup, not YAML)
+- ✅ All requirements pinned: `"library==1.0.0"`
+- ✅ Entity unique IDs for registry
+- ✅ `has_entity_name = True` for all entities
+- ✅ 100% config flow test coverage
+- ✅ Async-first design (never block event loop)
+- ✅ DataUpdateCoordinator for polling
+- ✅ Error handling: ConfigEntryNotReady, ConfigEntryAuthFailed
+
+### Must NOT Do
+- ❌ API calls directly in integration code
+- ❌ Block the event loop (use async or executor)
+- ❌ Log sensitive information (API keys, tokens)
+- ❌ Do I/O in properties (cache in update())
+- ❌ Pass `hass` to entity constructor
+- ❌ Skip pre-commit hooks
+- ❌ Large PRs (single platform minimum)
+
+## Common Pitfalls
+
+1. **Blocking Event Loop**: Use `await hass.async_add_executor_job()` for blocking calls
+2. **Missing Unique IDs**: Every entity needs unique_id
+3. **Vague Config Flow Tests**: Must test all paths and error cases
+4. **No External Library**: All API code must be on PyPI
+5. **Unpinned Requirements**: Must specify exact versions
+
+## Examples
+
+See templates/ directory for:
+- Complete manifest.json
+- __init__.py with coordinator
+- config_flow.py with reauth/reconfigure
+- coordinator.py with error handling
+- test_config_flow.py with 100% coverage
+
+## Best Practices
+
+- Keep PRs small (single platform for new integrations)
+- Base off `dev` branch, not `master`
+- Follow PEP8 (enforced by Ruff)
+- Type hints throughout
+- Meaningful commit messages
+- Test locally before PR
+
+## Version History
+
+- v1.0.0 (2025-11-20): Initial release
+````
+
+### Implementation Strategy
+
+**Phase 1 - Core Workflow (MVP)**:
+1. Scaffold tool execution
+2. Manifest.json customization
+3. Config flow implementation
+4. Basic entity creation
+5. Testing setup
+6. Validation tools
+
+**Phase 2 - Advanced Features**:
+1. DataUpdateCoordinator patterns
+2. Multiple platform support
+3. Device automations
+4. Diagnostics implementation
+5. Translations support
+
+**Phase 3 - Quality & Polish**:
+1. Quality scale progression (Bronze → Silver → Gold)
+2. Strict typing
+3. Advanced testing patterns
+4. PR submission guidance
+
+### Supporting Documentation Strategy
+
+**Separate Files for Deep Dives**:
+- `MANIFEST_GUIDE.md` - All manifest fields, integration types, IoT classes
+- `CONFIG_FLOW_GUIDE.md` - Step implementations, schemas, unique IDs, flows
+- `ENTITY_GUIDE.md` - 41 entity types, naming, registries, coordinators
+- `TESTING_GUIDE.md` - pytest patterns, fixtures, snapshots, coverage
+- `QUALITY_SCALE.md` - Bronze/Silver/Gold/Platinum requirements checklist
+
+**Progressive Disclosure Benefits**:
+- Main SKILL.md stays focused on workflow
+- Claude loads detailed guides only when needed
+- Reduces context usage
+- Easier to maintain and update
+
+### Testing the Skill
+
+Test with these queries:
+- "Help me create a Home Assistant integration"
+- "I need to implement a config flow for my HA integration"
+- "How do I structure a Home Assistant custom component?"
+- "Create a manifest.json for a new integration"
+- "What are the testing requirements for Home Assistant integrations?"
+
+The Skill should activate automatically for these queries based on the description triggers.
+
+### Key Files Generated by Skill
+
+**Minimum Required**:
 - `manifest.json` (complete and validated)
 - `__init__.py` (async_setup_entry with coordinator)
 - `config_flow.py` (full flow with reauth/reconfigure)
+- `strings.json` (i18n support)
+
+**Common Optional**:
 - `coordinator.py` (if polling API)
 - `const.py` (domain constants)
 - Platform files (`light.py`, `sensor.py`, etc.)
-- `strings.json` (i18n support)
 - `services.yaml` (if custom services)
+
+**Testing Required**:
+- `tests/__init__.py`
 - `tests/conftest.py` (fixtures)
-- `tests/test_config_flow.py` (100% coverage)
+- `tests/test_config_flow.py` (100% coverage mandatory)
 - `tests/test_init.py` (setup/unload tests)
 
-This research provides a comprehensive foundation for creating a Claude Code skill that guides developers through creating high-quality Home Assistant integrations following all documented best practices.
+### Skill Maintenance
+
+**Version History in SKILL.md**:
+```markdown
+## Version History
+- v1.0.0 (2025-11-20): Initial release with Bronze tier focus
+- v1.1.0 (TBD): Add Silver tier guidance
+- v2.0.0 (TBD): Add Gold/Platinum tier support
+```
+
+**Update Strategy**:
+- Monitor Home Assistant documentation for changes
+- Update when new quality scale rules added
+- Sync with new integration patterns
+- Track changes in scaffold tool output
+
+### Distribution
+
+**Recommended**: Create as project Skill in `.claude/skills/`
+- Share via git repository
+- Team automatically gets updates with `git pull`
+- Can be converted to plugin later for wider distribution
+
+**Alternative**: Package as Claude Code plugin for marketplace distribution
+
+## Summary
+
+This research provides a complete foundation for creating a Claude Code Skill that:
+
+1. **Follows Claude Skills Best Practices**:
+   - Model-invoked with clear triggers in description
+   - Focused on one capability (HA integration development)
+   - Progressive disclosure via supporting files
+   - Clear examples and templates
+   - Testable with realistic developer queries
+
+2. **Embeds Home Assistant Best Practices**:
+   - Bronze quality tier minimum
+   - Config entry pattern (not YAML)
+   - DataUpdateCoordinator for polling
+   - Async-first architecture
+   - 100% config flow test coverage
+   - External PyPI library requirement
+   - Complete validation toolchain
+
+3. **Provides Complete Workflow**:
+   - Scaffold → Customize → Implement → Test → Validate
+   - Clear do's and don'ts
+   - Common pitfalls called out
+   - Templates for all required files
+   - Quality progression path (Bronze → Platinum)
+
+The Skill will be discovered automatically when developers ask about Home Assistant integration development, and guide them through the complete process following all documented best practices.
