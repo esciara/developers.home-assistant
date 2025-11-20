@@ -1,0 +1,16 @@
+# Services for My Device integration
+# This file documents custom services for the integration
+
+force_refresh:
+  name: Force refresh
+  description: Forces an immediate data refresh from the device
+  fields:
+    entity_id:
+      name: Entity
+      description: Entity to refresh (optional, refreshes all if not specified)
+      required: false
+      example: "sensor.my_device_temperature"
+      selector:
+        entity:
+          domain: sensor
+          integration: my_device

@@ -1,0 +1,12 @@
+{
+  "domain": "my_device",
+  "name": "My Device",
+  "codeowners": ["@your_github_username"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://www.home-assistant.io/integrations/my_device",
+  "integration_type": "device",
+  "iot_class": "cloud_polling",
+  "quality_scale": "bronze",
+  "requirements": ["my-device-lib==1.0.0"]
+}
