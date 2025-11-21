@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "skills": {
+    "python-development": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": [
+          "python",
+          "pytest",
+          "mypy",
+          "type hint",
+          "type checking",
+          "pydantic",
+          "fastapi",
+          "async",
+          "asyncio",
+          "loguru"
+        ],
+        "intentPatterns": [
+          "write.*python.*function",
+          "create.*python.*class",
+          "fix.*python.*error",
+          "refactor.*python",
+          "test.*python",
+          "add.*type.*hint"
+        ]
+      }
+    },
+    "skill-auto-activation-setup": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": [
+          "skill autotrigger",
+          "skill auto-activation",
+          "skill hook",
+          "activate skill automatically",
+          "auto-activate skill"
+        ],
+        "intentPatterns": [
+          "set.*up.*skill.*activation",
+          "configure.*skill.*hook",
+          "skill.*don't.*activate",
+          "skill.*not.*triggering"
+        ]
+      }
+    }
+  }
+}

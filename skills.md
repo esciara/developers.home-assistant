@@ -202,6 +202,58 @@ Can you help me extract text from this PDF?
 
 Claude autonomously decides to use your Skill if it matches the request—you don't need to explicitly invoke it. The Skill activates automatically based on the context of your question.
 
+## Improve Skill auto-activation with hooks
+
+By default, Skills are model-invoked—Claude decides when to use them based on your request. However, you can enhance this discovery process using **UserPromptSubmit hooks** that analyze prompts and proactively suggest relevant Skills.
+
+The `skill-auto-activation-setup` Skill helps you configure this hook-based system:
+
+```bash
+# View available Skills and invoke the setup skill
+What Skills are available?
+
+# Or explicitly reference it
+Help me set up skill auto-activation
+```
+
+This Skill provides:
+
+* Hook templates for automatic skill activation
+* Configuration files for defining skill triggers
+* Setup instructions for enabling the hooks system
+* Troubleshooting guidance
+
+**How hook-based activation works**:
+
+1. User submits a prompt
+2. UserPromptSubmit hook analyzes the prompt for keywords and patterns
+3. Hook checks `.claude/skills/skill-rules.json` for matching skill triggers
+4. Matching skills are suggested before Claude responds
+5. Claude loads suggested skills and responds with that expertise
+
+**Example skill-rules.json**:
+
+```json
+{
+  "version": "1.0.0",
+  "skills": {
+    "python-development": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["python", "pytest", "mypy"],
+        "intentPatterns": ["write.*python.*function"]
+      }
+    }
+  }
+}
+```
+
+When you type "write a python function", the hook automatically suggests the python-development Skill before Claude responds.
+
+For complete setup instructions, see `.claude/skills/skill-auto-activation-setup/` or invoke the Skill directly.
+
 ## Debug a Skill
 
 If Claude doesn't use your Skill, check these common issues:
