@@ -19,23 +19,19 @@
 - **Faster navigation** - Direct links to relevant information
 - **Easier maintenance** - Update individual components without affecting others
 - **Parallel work** - Multiple people can work on different phases simultaneously
-- **Reusable templates** - Reduce errors and ensure consistency
+- **Simple setup** - No custom hooks, relies on Claude's native activation
 
 ---
 
 ## Executive Summary
 
-This plan enhances the Claude Code workflow (research → plan → implement) for extension-based systems like Home Assistant integrations using **100% Claude Code native features**:
+This plan enhances the Claude Code workflow (research → plan → implement) for Home Assistant integrations using **100% Claude Code native features**:
 
-- **Skills**: Knowledge base (patterns, templates, checklists) - auto-invoked via Claude's built-in activation
-- **Commands**: Workflow orchestration (research, plan, implement) - user-invoked
-- **Sub-agents**: Complex execution tasks (validation, analysis) - tool-invoked
+- **Skills**: Knowledge base pointing to docs/ - auto-invoked via Claude's built-in activation
+- **Commands**: Workflow orchestration - user-invoked
+- **Sub-agents**: Complex validation tasks - tool-invoked
 
-**Key Benefits:**
-- **Simple activation**: Claude's native Skill auto-activation via clear descriptions
-- **Progressive disclosure**: Only loads what's needed (efficient context usage)
-- **Git-native**: All in `.claude/` directory, version controlled
-- **Team sharing**: Instant availability via git pull
+**Key Principle:** Skills don't duplicate docs/, they **guide navigation** to relevant documentation in `docs/` and leverage existing research in `thoughts/shared/research/`.
 
 **Expected Impact:**
 - 35-45% reduction in total workflow time
@@ -50,63 +46,48 @@ This plan enhances the Claude Code workflow (research → plan → implement) fo
 ### 🚀 Getting Started
 
 **Choose Your Path:**
-- **Trial on existing integration?** → [MVP Approach](phases/mvp-approach.md) (12-15h)
+- **Trial on existing integration?** → [MVP Approach](phases/mvp-approach.md) (8-12h)
 - **Full implementation?** → Start with [Phase 1](phases/phase-1-skills.md)
 - **Understanding the system first?** → [System Architecture](architecture/overview.md)
 
 **Implementation Phases:**
-1. [Phase 1: Skills Creation](phases/phase-1-skills.md) (12-16h) - **Start here**
-2. [Phase 2: Specialized Commands](phases/phase-2-commands.md) (8-12h)
-3. [Phase 3: Validation Sub-agent](phases/phase-3-validator.md) (6-10h)
+1. [Phase 1: Skills Creation](phases/phase-1-skills.md) (8-12h) - **Start here**
+2. [Phase 2: Specialized Commands](phases/phase-2-commands.md) (6-8h)
+3. [Phase 3: Validation Sub-agent](phases/phase-3-validator.md) (4-6h)
+
+**Total Estimated Effort:** 18-26 hours (MVP: 8-12 hours)
 
 ### 📐 Architecture & Design
 
-Understanding how everything fits together:
 - [System Architecture Overview](architecture/overview.md) - Component model and interaction
 - [Component Interaction Model](architecture/component-interaction.md) - Skills → Commands → Agents flow
 
-### 🔨 Implementation Guides
+### 📚 Foundation Research
 
-When you're ready to build:
+**All implementation details are in these research documents:**
 
-**Creating Skills:**
-- [Skill Creation Template](implementation/skills/_template.md)
-- Individual Skill Specs:
-  - [ha-entity-knowledge](implementation/skills/ha-entity-knowledge.md) ⭐ Most Critical
-  - [ha-integration-structure](implementation/skills/ha-integration-structure.md)
-  - [ha-config-flow-knowledge](implementation/skills/ha-config-flow-knowledge.md)
-  - [ha-coordinator-knowledge](implementation/skills/ha-coordinator-knowledge.md)
-  - [ha-common-mistakes](implementation/skills/ha-common-mistakes.md)
+- **Creating New Integrations**: `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md`
+  - Integration structure, config flows, entities, testing
+  - Quality scale requirements
+  - Comprehensive patterns and requirements
 
-**Creating Commands:**
-- [Command Creation Template](implementation/commands/_template.md)
-- Individual Command Specs:
-  - [research_ha_integration](implementation/commands/research-ha-integration.md)
-  - [create_plan_ha_integration](implementation/commands/create-plan-ha-integration.md)
-  - [implement_plan_ha_integration](implementation/commands/implement-plan-ha-integration.md)
+- **Refactoring Existing Integrations**: `thoughts/shared/research/2025-11-21-home-assistant-integration-refactoring-patterns.md`
+  - Config flow migration
+  - Entity modernization
+  - Quality tier upgrades
+  - Runtime data migration
 
-**Creating Sub-agents:**
-- [ha-integration-validator](implementation/agents/ha-integration-validator.md)
-
-### 🧪 Testing & Validation
-
-Ensure quality at each step:
-- [Skill Validation Testing](testing/skill-validation-tests.md)
-- [Command Integration Testing](testing/command-integration-tests.md)
-- [End-to-End Integration Tests](testing/integration-tests.md)
+- **Home Assistant Documentation**: `docs/` directory
+  - Source of truth for all patterns
+  - Config flows: `docs/config_entries_*.md`
+  - Entities: `docs/core/entity*.md`
+  - Quality scale: `docs/core/integration-quality-scale/`
+  - Testing: `docs/development_testing.md`
 
 ### 📚 Reference
 
-Supporting information:
 - [Timeline & Effort Estimates](reference/timeline.md)
 - [Success Metrics](reference/success-metrics.md)
-- [Risk Mitigation](reference/risk-mitigation.md)
-- [Future Enhancements](reference/future-enhancements.md)
-
-### 💡 Examples
-
-See it in action:
-- [Real Integration Walkthrough](examples/real-integration-walkthrough.md)
 
 ---
 
@@ -114,7 +95,7 @@ See it in action:
 
 ```
 .claude/
-├── skills/              # Knowledge base (auto-invoked via hooks)
+├── skills/              # Knowledge navigators (point to docs/)
 │   ├── ha-integration-structure/
 │   ├── ha-entity-knowledge/
 │   ├── ha-config-flow-knowledge/
@@ -133,44 +114,50 @@ See it in action:
 **How Components Work Together:**
 1. User invokes: `/research_ha_integration`
 2. Claude automatically activates relevant Skills based on SKILL.md descriptions
-3. Claude uses Skills' patterns/templates during work
-4. Command may launch sub-agents for complex analysis
-5. Skills provide context throughout entire workflow
+3. Skills guide Claude to relevant sections in `docs/` and research documents
+4. Command may launch sub-agents for complex validation
+5. Skills provide navigation context throughout entire workflow
 
 **Read more:** [Component Interaction Model](architecture/component-interaction.md)
 
 ---
 
-## Recommended Path for Your Use Case
+## What Goes in Skills
 
-**Scenario: Trial on existing integration needing config flow overhaul**
+**Skills are NOT documentation duplicates.** They are:
 
-### Phase 0: Preparation (15 min)
-1. Read [System Architecture](architecture/overview.md)
-2. Read [MVP Approach](phases/mvp-approach.md)
+✅ **Navigation guides** - "For config flows, see `docs/config_entries_config_flow_handler.md:14-49`"
+✅ **Pattern reminders** - "Must test connection before completing config flow"
+✅ **Quality requirements** - "Bronze tier requires: config-flow, entity-unique-id, has-entity-name"
+✅ **Decision trees** - "Use DataUpdateCoordinator when polling multiple entities"
+✅ **Checklists** - Quick validation lists
 
-### Phase 1: MVP Setup (5-6h)
-Focus on config flow specific components:
+❌ **NOT detailed code examples** - Those are in `docs/` and research files
+❌ **NOT skill creation how-tos** - Use Anthropic's `skill-creator` skill for that
+❌ **NOT comprehensive references** - Point to `docs/` instead
 
-**One Critical Skill (2-3h):**
-- Create [ha-config-flow-knowledge](implementation/skills/ha-config-flow-knowledge.md)
-- Write clear SKILL.md description for auto-activation
-- Test Skill activation
+**Skills answer:** "Where should I look?" and "What should I remember?"
+**Docs answer:** "How do I implement this?"
 
-**One Command (2-3h):**
-- Create [research_ha_integration](implementation/commands/research-ha-integration.md)
-- Test on your target integration
+---
 
-### Phase 2: Trial Run (2-4h)
-- Use the MVP on your real integration
-- Refine Skill descriptions based on actual usage
-- Document learnings
+## Recommended Path
 
-### Phase 3: Expand Based on Results
-If trial successful:
-- Add remaining Skills
-- Add remaining Commands
-- Scale to full implementation
+**For config flow overhaul trial:**
+
+1. **Preparation** (15 min)
+   - Read [MVP Approach](phases/mvp-approach.md)
+   - Read research: `thoughts/shared/research/2025-11-21-home-assistant-integration-refactoring-patterns.md` section 1
+
+2. **MVP Implementation** (8-12h)
+   - Create `ha-config-flow-knowledge` Skill
+   - Create `research_ha_integration` Command
+   - Test on real integration
+
+3. **Expand if successful**
+   - Add remaining Skills
+   - Add remaining Commands
+   - Add validation sub-agent
 
 **See:** [MVP Approach](phases/mvp-approach.md) for detailed guidance
 
@@ -178,15 +165,14 @@ If trial successful:
 
 ## Context Usage Guide
 
-**When you're working on different tasks, load only these files:**
+**When working on different tasks, load only these files:**
 
 | Task | Load These Files | Lines |
 |------|-----------------|-------|
-| **Initial planning** | README.md + architecture/overview.md | ~300 |
-| **Creating a Skill** | implementation/skills/[skill-name].md + _template.md | ~250 |
-| **Creating a Command** | implementation/commands/[command-name].md + _template.md | ~200 |
-| **Testing Skills** | testing/skill-validation-tests.md | ~150 |
-| **Checking progress** | README.md + reference/timeline.md | ~250 |
+| **Initial planning** | README.md + architecture/overview.md | ~250 |
+| **Creating a Skill** | phase-1-skills.md + research docs | ~200 |
+| **Creating a Command** | phase-2-commands.md | ~150 |
+| **Checking progress** | README.md + reference/timeline.md | ~200 |
 
 **Compare to v2:** Would load entire 723-line file for any task
 
@@ -194,22 +180,17 @@ If trial successful:
 
 ## Quick Reference
 
-**Total Effort:** 26-38 hours (MVP: 12-15 hours)
-
-**Critical Dependencies:**
-- Skills must have clear descriptions for Claude's auto-activation
-- Skills must exist before Commands can reference them
-- Commands provide context for sub-agent validation
+**Total Effort:** 18-26 hours (MVP: 8-12 hours)
 
 **Most Important Files to Read First:**
 1. This README (you are here)
 2. [System Architecture Overview](architecture/overview.md)
-3. [Phase 1: Skills Creation](phases/phase-1-skills.md)
+3. [Phase 1: Skills Foundation](phases/phase-1-skills.md)
 4. [MVP Approach](phases/mvp-approach.md) - if doing trial first
 
 ---
 
 **Plan Version:** v4-native-activation
-**Migrated From:** v3-composable (removed custom hooks)
+**Key Difference from v3:** No custom hooks, relies on Claude's built-in Skill activation
 **Status:** Ready for Implementation
 **Next Step:** Read [MVP Approach](phases/mvp-approach.md) or [Phase 1](phases/phase-1-skills.md) to begin
