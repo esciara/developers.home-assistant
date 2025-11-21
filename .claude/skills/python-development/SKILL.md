@@ -1,6 +1,6 @@
 ---
-name: "Python Development Best Practices"
-description: "Comprehensive Python development guidelines covering type checking, testing, logging, code style, and tooling"
+name: python-development
+description: Comprehensive Python development guidelines covering type checking, testing, logging, code style, and tooling. Use when writing Python code, configuring mypy, pytest, setting up logging with loguru, or following Python best practices.
 ---
 
 # Python Development Best Practices

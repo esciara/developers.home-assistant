@@ -1,6 +1,6 @@
 ---
-name: "Skill Auto-Activation Setup"
-description: "Set up hook-based auto-activation for Claude Code skills using UserPromptSubmit hooks"
+name: skill-auto-activation-setup
+description: Set up hook-based auto-activation for Claude Code skills using UserPromptSubmit hooks. Use when skills don't activate automatically, when setting up skill triggers, or when configuring skill-rules.json and hook files for automatic skill suggestions.
 ---
 
 # Skill Auto-Activation Setup
