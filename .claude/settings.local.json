@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rev:*)"
+      "Bash(rev:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(bash scripts/spec_metadata.sh:*)",
+      "Bash(humanlayer thoughts sync:*)"
     ],
     "deny": [],
     "ask": []
