@@ -10,9 +10,9 @@
 
 ## Overview
 
-Phase 1 creates five Skills that act as **navigation guides** to the Home Assistant documentation. These Skills don't duplicate docs/, they point Claude to the right places and provide decision-making context.
+Phase 1 creates five Skills that act as **navigation guides** to the research documents. These Skills don't duplicate research docs, they point Claude to the right sections and provide decision-making context.
 
-**Key Principle:** Skills = "Where to look" + "What to remember", NOT "How to implement"
+**Key Principle:** Skills point to research doc sections (which contain precise info from docs/), NOT direct to `docs/` files
 
 ---
 
@@ -25,50 +25,44 @@ Create these Skills in `.claude/skills/`:
 **1. ha-integration-structure**
 - **Purpose**: Guide file organization and manifest creation
 - **Points to**:
-  - `docs/creating_integration_manifest.md`
-  - `docs/creating_integration_file_structure.md`
-  - `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md` (sections 1-2)
-- **Provides**: File structure checklists, required vs optional files
+  - New integrations doc → Section 1 (Getting Started)
+  - New integrations doc → Section 7 (Development Workflow)
+- **Provides**: File structure checklists, required vs optional files, manifest patterns
 - **Activates on**: "integration structure", "manifest", "what files"
 
 **2. ha-entity-knowledge** ⭐ Most Critical
 - **Purpose**: Guide entity implementation with focus on unique IDs
 - **Points to**:
-  - `docs/core/entity.md`
-  - `docs/entity_registry_index.md`
-  - `docs/device_registry_index.md`
-  - Research doc sections 3.1-3.4 (entity patterns)
-- **Provides**: Decision trees for entity types, unique ID strategies, device info requirements
+  - New integrations doc → Section 3 (Entity Implementation)
+  - Refactoring doc → Section 2 (Entity Refactoring Patterns)
+- **Provides**: Decision trees for entity types, unique ID strategies, device info requirements, has_entity_name patterns
 - **Activates on**: "entity", "sensor", "unique id", "device info"
 - **Critical**: Unique ID stability is a common pain point
 
 **3. ha-config-flow-knowledge**
 - **Purpose**: Guide config flow implementation
 - **Points to**:
-  - `docs/config_entries_config_flow_handler.md`
-  - `docs/data_entry_flow_index.md`
-  - Research doc section 1 (config flow patterns)
-  - Refactoring doc section 1 (adding config flows)
-- **Provides**: Flow step patterns, error handling checklist, 100% test coverage requirement
+  - New integrations doc → Section 2 (Configuration Flows)
+  - Refactoring doc → Section 1 (Config Flow Refactoring)
+  - Refactoring doc → Section 7 (Authentication Flows)
+- **Provides**: Flow step patterns, error handling checklist, 100% test coverage requirement, reauthentication
 - **Activates on**: "config flow", "configuration", "setup wizard"
 
 **4. ha-coordinator-knowledge**
 - **Purpose**: Guide DataUpdateCoordinator usage
 - **Points to**:
-  - `docs/integration_fetching_data.md`
-  - Research doc section 6 (coordinator patterns)
-  - Refactoring doc section 9.4 (coordinator setup)
+  - New integrations doc → Section 6 (Core Concepts - DataUpdateCoordinator)
+  - Refactoring doc → Section 9.4 (DataUpdateCoordinator async_setup)
 - **Provides**: When to use coordinator, update interval guidelines, error handling patterns
 - **Activates on**: "coordinator", "polling", "data update"
 
 **5. ha-common-mistakes**
 - **Purpose**: Remind about anti-patterns and quality requirements
 - **Points to**:
-  - `docs/core/integration-quality-scale/index.md`
-  - `docs/asyncio_blocking_operations.md`
-  - Research doc section 5 (quality scale)
-  - Refactoring doc sections 2-3 (entity and quality upgrades)
-- **Provides**: Bronze tier checklist, async pitfalls, unique ID issues
+  - New integrations doc → Section 5 (Quality Scale)
+  - Refactoring doc → Section 3 (Quality Tier Upgrades)
+  - Refactoring doc → Section 2.5 (Entity Availability Handling)
+- **Provides**: Bronze tier checklist, async pitfalls, unique ID issues, quality upgrade paths
 - **Activates on**: "error", "issue", "best practice", "quality"
 
 ---
@@ -80,11 +74,10 @@ Each Skill should contain:
 ### SKILL.md
 - **Description**: Clear, specific description that triggers Claude's auto-activation
 - **Purpose**: One sentence on when to use this Skill
-- **Documentation Map**: Bulleted list of relevant docs/ files with brief descriptions
-- **Research Links**: Pointers to specific sections in research documents
-- **Decision Trees**: "Use X when Y, use Z when W"
-- **Key Requirements**: Must-have items (e.g., "100% config flow test coverage")
-- **Common Questions**: Quick answers with pointers to details
+- **Research Doc Section Map**: Bulleted list of relevant sections in the two research documents
+- **Decision Trees**: "Use X when Y, use Z when W" (from research docs)
+- **Key Requirements**: Must-have items (e.g., "100% config flow test coverage" from research doc section 2)
+- **Common Questions**: Quick answers with pointers to research doc sections
 
 ### Supporting Files (Optional)
 - Quick reference checklists
@@ -92,9 +85,9 @@ Each Skill should contain:
 - Link collections
 
 **What NOT to include:**
-- ❌ Detailed code examples (those are in docs/)
-- ❌ Comprehensive tutorials (point to docs/)
-- ❌ Duplicated documentation content
+- ❌ Direct docs/ file references (point to research doc sections instead)
+- ❌ Detailed code examples (those are in research docs)
+- ❌ Duplicated research doc content
 
 ---
 
@@ -102,10 +95,9 @@ Each Skill should contain:
 
 - [ ] All five Skills created with clear SKILL.md descriptions
 - [ ] Skills activate automatically when relevant topics mentioned
-- [ ] Each Skill points to correct docs/ files
-- [ ] Skills reference research documents appropriately
-- [ ] Navigation tests pass (user asks question → Skill guides to right doc)
-- [ ] No code duplication from docs/
+- [ ] Each Skill points to correct research doc sections
+- [ ] Navigation tests pass (user asks question → Skill guides to right research doc section)
+- [ ] No duplication from research docs
 
 ---
 
@@ -114,10 +106,10 @@ Each Skill should contain:
 **For each Skill:**
 
 1. **Define scope** - What questions does this Skill answer?
-2. **Map documentation** - Which docs/ files are relevant?
-3. **Create SKILL.md** - Clear description for auto-activation + navigation guide
+2. **Map research sections** - Which research doc sections are relevant?
+3. **Create SKILL.md** - Clear description for auto-activation + section map
 4. **Test activation** - Does it activate on relevant prompts?
-5. **Validate navigation** - Does it point to the right docs?
+5. **Validate navigation** - Does it point to the right research doc sections?
 
 **Use Anthropic's `skill-creator` skill** to help with the actual creation process.
 
@@ -125,12 +117,29 @@ Each Skill should contain:
 
 ## Documentation References
 
-**All details are in:**
-- `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md` - New integration patterns
-- `thoughts/shared/research/2025-11-21-home-assistant-integration-refactoring-patterns.md` - Refactoring patterns
-- `docs/` directory - Source of truth for implementation
+**Skills reference these research documents:**
 
-**Skills should reference these, not duplicate them.**
+**New Integrations Doc** (595 lines): `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md`
+- Section 1: Getting Started
+- Section 2: Configuration Flows
+- Section 3: Entity Implementation
+- Section 4: Testing Requirements
+- Section 5: Quality Scale
+- Section 6: Core Concepts (async, coordinator)
+- Section 7: Development Workflow
+
+**Refactoring Doc** (1,848 lines): `thoughts/shared/research/2025-11-21-home-assistant-integration-refactoring-patterns.md`
+- Section 1: Config Flow Refactoring
+- Section 2: Entity Refactoring Patterns
+- Section 3: Quality Tier Upgrades
+- Section 4: Runtime Data Migration
+- Section 5: Config Entry Migration
+- Section 6: Device & Discovery Patterns
+- Section 7: Authentication Flows
+- Section 8: Testing Modernization
+- Section 9: Common API Deprecations
+
+**Skills point to sections, not to `docs/` directly.** Research docs already reference `docs/` as needed.
 
 ---
 

@@ -27,11 +27,11 @@
 
 This plan enhances the Claude Code workflow (research → plan → implement) for Home Assistant integrations using **100% Claude Code native features**:
 
-- **Skills**: Knowledge base pointing to docs/ - auto-invoked via Claude's built-in activation
+- **Skills**: Knowledge base pointing to research docs - auto-invoked via Claude's built-in activation
 - **Commands**: Workflow orchestration - user-invoked
 - **Sub-agents**: Complex validation tasks - tool-invoked
 
-**Key Principle:** Skills don't duplicate docs/, they **guide navigation** to relevant documentation in `docs/` and leverage existing research in `thoughts/shared/research/`.
+**Key Principle:** Skills point to **research documents** which contain precise, organized patterns extracted from `docs/`. Navigate: Plan → Research Docs → (if needed) Official Docs.
 
 **Expected Impact:**
 - 35-45% reduction in total workflow time
@@ -63,25 +63,29 @@ Understanding how everything fits together:
 
 ### 📚 Foundation Research
 
-**All implementation details are in these research documents:**
+**Skills reference these research documents (not `docs/` directly):**
 
-- **Creating New Integrations**: `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md`
-  - Integration structure, config flows, entities, testing
-  - Quality scale requirements
-  - Comprehensive patterns and requirements
+- **Creating New Integrations**: `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md` (595 lines)
+  - Section 1: Getting Started - manifest, file structure
+  - Section 2: Configuration Flows - 100% coverage requirement, patterns
+  - Section 3: Entity Implementation - unique IDs, device info, naming
+  - Section 4: Testing Requirements - 95%+ coverage, fixtures
+  - Section 5: Quality Scale - Bronze/Silver/Gold/Platinum tiers
+  - Section 6: Core Concepts - async patterns, DataUpdateCoordinator
+  - Section 7: Development Workflow - submission process
 
-- **Refactoring Existing Integrations**: `thoughts/shared/research/2025-11-21-home-assistant-integration-refactoring-patterns.md`
-  - Config flow migration
-  - Entity modernization
-  - Quality tier upgrades
-  - Runtime data migration
+- **Refactoring Existing Integrations**: `thoughts/shared/research/2025-11-21-home-assistant-integration-refactoring-patterns.md` (1,848 lines)
+  - Section 1: Config Flow Refactoring - YAML → UI migration
+  - Section 2: Entity Refactoring - has_entity_name, unique IDs, native values
+  - Section 3: Quality Tier Upgrades - Bronze → Silver → Gold → Platinum
+  - Section 4: Runtime Data Migration - hass.data → ConfigEntry.runtime_data
+  - Section 5: Config Entry Migration - version management
+  - Section 6: Device & Discovery - device registry, zeroconf
+  - Section 7: Authentication Flows - reauthentication, reconfiguration
+  - Section 8: Testing Modernization - achieving 95%+ coverage
+  - Section 9: API Deprecations - async_forward_entry_setups, etc.
 
-- **Home Assistant Documentation**: `docs/` directory
-  - Source of truth for all patterns
-  - Config flows: `docs/config_entries_*.md`
-  - Entities: `docs/core/entity*.md`
-  - Quality scale: `docs/core/integration-quality-scale/`
-  - Testing: `docs/development_testing.md`
+**These research docs reference `docs/` as source of truth** - Skills use research docs, not direct `docs/` references.
 
 ### 📚 Reference
 
@@ -94,7 +98,7 @@ Understanding how everything fits together:
 
 ```
 .claude/
-├── skills/              # Knowledge navigators (point to docs/)
+├── skills/              # Knowledge navigators (point to research docs)
 │   ├── ha-integration-structure/
 │   ├── ha-entity-knowledge/
 │   ├── ha-config-flow-knowledge/
@@ -115,7 +119,7 @@ Understanding how everything fits together:
 **How Components Work Together:**
 1. User invokes: `/research_ha_integration`
 2. Claude automatically activates relevant Skills based on SKILL.md descriptions
-3. Skills guide Claude to relevant sections in `docs/` and research documents
+3. Skills guide Claude to relevant sections in research documents (which reference `docs/` as needed)
 4. Command may launch sub-agents for complex validation
 5. Skills provide navigation context throughout entire workflow
 
@@ -127,18 +131,19 @@ Understanding how everything fits together:
 
 **Skills are NOT documentation duplicates.** They are:
 
-✅ **Navigation guides** - "For config flows, see `docs/config_entries_config_flow_handler.md:14-49`"
-✅ **Pattern reminders** - "Must test connection before completing config flow"
-✅ **Quality requirements** - "Bronze tier requires: config-flow, entity-unique-id, has-entity-name"
-✅ **Decision trees** - "Use DataUpdateCoordinator when polling multiple entities"
-✅ **Checklists** - Quick validation lists
+✅ **Research doc pointers** - "For config flows, see research doc section 2"
+✅ **Pattern reminders** - "Must test connection before completing config flow (research doc 2025-11-20, section 2)"
+✅ **Quality requirements** - "Bronze tier requires: config-flow, entity-unique-id, has-entity-name (research doc section 5)"
+✅ **Decision trees** - "Use DataUpdateCoordinator when polling multiple entities (research doc section 6)"
+✅ **Section maps** - Quick navigation to relevant research doc sections
 
-❌ **NOT detailed code examples** - Those are in `docs/` and research files
+❌ **NOT direct docs/ references** - Point to research docs instead
+❌ **NOT detailed code examples** - Those are in research docs
 ❌ **NOT skill creation how-tos** - Use Anthropic's `skill-creator` skill for that
-❌ **NOT comprehensive references** - Point to `docs/` instead
 
-**Skills answer:** "Where should I look?" and "What should I remember?"
-**Docs answer:** "How do I implement this?"
+**Navigation flow:** Skill → Research Doc Section → (if needed) Official Docs
+**Skills answer:** "Which research doc section should I read?"
+**Research docs answer:** "How do I implement this?"
 
 ---
 

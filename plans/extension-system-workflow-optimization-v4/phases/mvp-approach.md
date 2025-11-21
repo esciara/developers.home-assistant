@@ -27,15 +27,17 @@
 **Choose based on your trial integration needs:**
 
 **For config flow overhaul:** `ha-config-flow-knowledge`
-- Points to: `docs/config_entries_config_flow_handler.md`, refactoring patterns section 1
+- Points to: Refactoring patterns doc section 1 (Config Flow Refactoring)
+- Points to: New integrations doc section 2 (Configuration Flows)
 - Provides: Flow patterns, error handling, 100% test coverage requirement
 
 **For entity work:** `ha-entity-knowledge`
-- Points to: `docs/core/entity.md`, `docs/entity_registry_index.md`
+- Points to: New integrations doc section 3 (Entity Implementation)
+- Points to: Refactoring patterns doc section 2 (Entity Refactoring)
 - Provides: Unique ID strategies, device info patterns, entity types
 
 **For general integration:** `ha-integration-structure`
-- Points to: `docs/creating_integration_manifest.md`, file structure docs
+- Points to: New integrations doc section 1 (Getting Started)
 - Provides: Required files checklist, manifest patterns
 
 **Create using:** Anthropic's `skill-creator` skill
@@ -43,7 +45,7 @@
 **Deliverables:**
 - One complete Skill in `.claude/skills/`
 - SKILL.md with clear description for auto-activation
-- Documentation map pointing to relevant `docs/` files
+- Section map pointing to relevant research doc sections
 
 ### 2. One Command (4-6 hours)
 
@@ -51,7 +53,7 @@
 - HA-specific research protocol
 - References your Skill automatically
 - Structured output format
-- Points to relevant docs/ sections
+- Points to relevant research doc sections
 
 **Deliverables:**
 - Command in `.claude/commands/research_ha_integration.md`
@@ -80,7 +82,7 @@
 
 **Use `skill-creator` to create:**
 - SKILL.md with clear, specific description
-- Documentation map to `docs/` files
+- Section map to research doc sections
 - Decision trees for common scenarios
 - Key requirements checklist
 
@@ -95,7 +97,7 @@
 - Defines HA-specific research checklist
 - References your Skill explicitly
 - Produces structured output
-- Points to relevant docs/ sections
+- Points to relevant research doc sections
 
 **Test on 2-3 integrations:**
 - Existing simple integration
@@ -107,8 +109,8 @@
 **Your use case: Existing integration needing config flow overhaul**
 
 1. Use `/research_ha_integration <your-integration>`
-2. Skill should activate and guide to config flow docs
-3. Follow documentation pointers
+2. Skill should activate and guide to refactoring patterns doc section 1
+3. Follow research doc pointers (which reference official docs as needed)
 4. Implement changes
 5. Document what worked / what didn't
 
@@ -118,7 +120,7 @@
 
 - [ ] Skill created with clear SKILL.md
 - [ ] Skill activates automatically on relevant prompts
-- [ ] Skill correctly points to docs/ files
+- [ ] Skill correctly points to research doc sections
 - [ ] Command created and tested
 - [ ] Command produces better results than generic research
 - [ ] Used on real integration work
@@ -150,13 +152,13 @@
 
 **Potential Issues:**
 - ⚠️ Skill doesn't activate reliably → Refine SKILL.md description
-- ⚠️ Documentation pointers not useful → Review research docs, improve navigation
+- ⚠️ Research doc pointers not useful → Review section organization, improve navigation
 - ⚠️ Command doesn't improve workflow → Refine command structure
 - ⚠️ Native activation not working → Consider v3 with custom hooks
 
 **Adjustments:**
 1. Refine Skill description for better activation
-2. Improve documentation maps
+2. Improve research doc section maps
 3. Add more decision trees/checklists
 4. Test on different integration types
 
@@ -205,7 +207,7 @@
 
 Compare MVP workflow vs generic:
 - Research time: How much faster?
-- Documentation finding: Easier?
+- Research doc navigation: Easier?
 - Context usage: More efficient?
 - Team satisfaction: Useful?
 
@@ -213,7 +215,7 @@ Compare MVP workflow vs generic:
 
 - Time to research integration: _____ minutes (vs _____ before)
 - Skill activation success rate: _____%
-- Documentation navigation: Improved? Y/N
+- Research doc navigation: Improved? Y/N
 - Team would expand: Y/N
 
 ### Share Results
