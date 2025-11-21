@@ -1,0 +1,197 @@
+{
+  "main": {
+    "id": "0bad820df4e8155e",
+    "type": "split",
+    "children": [
+      {
+        "id": "5f1db55f63d6fb6c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a5c1197775a392f3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "extension-system-workflow-optimization-plan-v2-high-level"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "16bd8c1f99f09377",
+    "type": "split",
+    "children": [
+      {
+        "id": "972b1cc9abe5dfd3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "66690dc61b95a863",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "42e5bdabcc4e8ff5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "499f9184a84e79b4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8f858a56134b0f48",
+    "type": "split",
+    "children": [
+      {
+        "id": "b8aea2e1a3f26caa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "308a542c90da7e05",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for extension-system-workflow-optimization-plan-v2-high-level"
+            }
+          },
+          {
+            "id": "e855ef89017f6ff6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from extension-system-workflow-optimization-plan-v2-high-level"
+            }
+          },
+          {
+            "id": "d7730ddfaecb39d3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3c087b402cde1f2a",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "f14c8ce086e1ed77",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of extension-system-workflow-optimization-plan-v2-high-level"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "a5c1197775a392f3",
+  "lastOpenFiles": [
+    "scripts/tsconfig.json",
+    "scripts/test.ts",
+    "scripts/package.json",
+    "scripts/dev-with-posthog.sh",
+    "scripts/bun.lock",
+    "scripts/README.md",
+    "scripts/CLAUDE.md",
+    "scripts"
+  ]
+}
