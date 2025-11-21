@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "file": "plans/extension-system-workflow-optimization-v3/README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "extension-system-workflow-optimization-plan-v2-high-level"
+              "title": "README"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "file": "plans/extension-system-workflow-optimization-v3/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for extension-system-workflow-optimization-plan-v2-high-level"
+              "title": "Backlinks for README"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "file": "plans/extension-system-workflow-optimization-v3/README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from extension-system-workflow-optimization-plan-v2-high-level"
+              "title": "Outgoing links from README"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+                "file": "plans/extension-system-workflow-optimization-v3/README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of extension-system-workflow-optimization-plan-v2-high-level"
+              "title": "Outline of README"
             }
           }
         ]
@@ -185,13 +185,51 @@
   },
   "active": "a5c1197775a392f3",
   "lastOpenFiles": [
-    "scripts/tsconfig.json",
-    "scripts/test.ts",
-    "scripts/package.json",
-    "scripts/dev-with-posthog.sh",
-    "scripts/bun.lock",
-    "scripts/README.md",
-    "scripts/CLAUDE.md",
-    "scripts"
+    "thoughts/searchable/shared/handoffs/general/2025-11-21_17-01-32_v3-composable-plan-creation.md",
+    "thoughts/shared/handoffs/general/2025-11-21_17-01-32_v3-composable-plan-creation.md",
+    "plans/extension-system-workflow-optimization-v3/phases/mvp-approach.md",
+    "plans/extension-system-workflow-optimization-v3/README.md",
+    "plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+    "plans/extension-system-workflow-optimization-v3/MIGRATION-FROM-V2.md",
+    "plans/extension-system-workflow-optimization-v3/examples/skill-rules-examples.json",
+    "plans/extension-system-workflow-optimization-v3/reference/success-metrics.md",
+    "plans/extension-system-workflow-optimization-v3/reference/timeline.md",
+    "plans/extension-system-workflow-optimization-v3/implementation/skills/ha-config-flow-knowledge.md",
+    "plans/extension-system-workflow-optimization-v3/implementation/skills/_template.md",
+    "plans/extension-system-workflow-optimization-v3/phases/phase-3-validator.md",
+    "plans/extension-system-workflow-optimization-v3/phases/phase-2-commands.md",
+    "plans/extension-system-workflow-optimization-v3/phases/phase-1-skills.md",
+    "plans/extension-system-workflow-optimization-v3/architecture/component-interaction.md",
+    "plans/extension-system-workflow-optimization-v3/architecture/hook-system.md",
+    "plans/extension-system-workflow-optimization-v3/architecture/overview.md",
+    "plans/extension-system-workflow-optimization-v3/implementation/skills",
+    "plans/extension-system-workflow-optimization-v3/implementation/commands",
+    "plans/extension-system-workflow-optimization-v3/implementation/agents",
+    "plans/extension-system-workflow-optimization-v3/testing",
+    "plans/extension-system-workflow-optimization-v3/reference",
+    "plans/extension-system-workflow-optimization-v3/phases",
+    "plans/extension-system-workflow-optimization-v3/implementation",
+    "plans/extension-system-workflow-optimization-v3/examples",
+    "plans/extension-system-workflow-optimization-v3/architecture",
+    "worktrees/auto-activation-skill/thoughts/shared/handoffs/general/2025-11-21_00-00-00_workflow-optimization-plans.md",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/tutorial/ssh.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/tutorial/python3-http-server.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/tutorial/addon_hello_world_logs.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/screenshots/ssh-upgrade.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/screenshots/local_repository.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/screenshots/first-start.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/screenshots/dashboard.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/screenshots/addon-hass-configurator.png",
+    "worktrees/auto-activation-skill/static/img/en/hass.io/screenshots/adding_repositories.png",
+    "worktrees/auto-activation-skill/static/img/en/blog/2023-02-28-custom-tile-features/example.png",
+    "worktrees/auto-activation-skill/skills.md",
+    "worktrees/auto-activation-skill/plans/extension-system-workflow-optimization-plan-v2.md",
+    "worktrees/auto-activation-skill/plans/extension-system-workflow-optimization-plan-v2-high-level.md",
+    "worktrees/auto-activation-skill/plans/extension-system-workflow-optimization-plan-v1.md",
+    "worktrees/auto-activation-skill/docs/voice/pipelines/index.md",
+    "worktrees/auto-activation-skill/docs/voice/intents/index.md",
+    "worktrees/auto-activation-skill/docs/voice/intent-recognition/test-syntax.md",
+    "worktrees/auto-activation-skill/docs/voice/intent-recognition/template-sentence-syntax.md",
+    "worktrees/auto-activation-skill/docs/voice/intent-recognition/supported-languages.md"
   ]
 }
