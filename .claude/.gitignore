@@ -7,3 +7,4 @@ shell-snapshots
 statsig
 todos
 history.jsonl
+*.local.*
