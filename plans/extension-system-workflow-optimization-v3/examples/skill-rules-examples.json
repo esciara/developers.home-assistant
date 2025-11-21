@@ -1,0 +1,160 @@
+{
+  "_comment": "Example skill-rules.json configuration for Home Assistant integration development",
+  "_note": "Copy this file to project root or .claude/ directory",
+  
+  "ha-entity-knowledge": {
+    "_description": "Activates for entity-related work",
+    "prompt_patterns": [
+      "entity",
+      "sensor",
+      "switch",
+      "climate",
+      "light",
+      "binary sensor",
+      "binary_sensor",
+      "unique id",
+      "unique_id",
+      "device info",
+      "device_info",
+      "entity state",
+      "entity attribute",
+      "state class",
+      "device class",
+      "CoordinatorEntity",
+      "SensorEntity",
+      "SwitchEntity"
+    ],
+    "file_patterns": [
+      "**/homeassistant/components/**/sensor.py",
+      "**/homeassistant/components/**/switch.py",
+      "**/homeassistant/components/**/climate.py",
+      "**/homeassistant/components/**/light.py",
+      "**/homeassistant/components/**/binary_sensor.py",
+      "**/homeassistant/components/**/*_entity.py",
+      "**/tests/components/**/test_sensor.py",
+      "**/tests/components/**/test_switch.py"
+    ],
+    "contexts": [
+      "entity implementation",
+      "platform development",
+      "device integration",
+      "entity testing"
+    ]
+  },
+
+  "ha-integration-structure": {
+    "_description": "Activates for integration structure and setup",
+    "prompt_patterns": [
+      "manifest",
+      "integration structure",
+      "required files",
+      "__init__.py",
+      "manifest.json",
+      "integration setup",
+      "what files",
+      "file organization",
+      "domain",
+      "codeowners",
+      "integration requirements"
+    ],
+    "file_patterns": [
+      "**/homeassistant/components/**/manifest.json",
+      "**/homeassistant/components/**/__init__.py",
+      "**/homeassistant/components/**/const.py"
+    ],
+    "contexts": [
+      "integration setup",
+      "file organization",
+      "new integration",
+      "manifest configuration"
+    ]
+  },
+
+  "ha-config-flow-knowledge": {
+    "_description": "Activates for configuration flow work",
+    "prompt_patterns": [
+      "config flow",
+      "config_flow",
+      "configuration",
+      "setup wizard",
+      "user input",
+      "config entry",
+      "options flow",
+      "flow step",
+      "async_step",
+      "async_step_user",
+      "async_step_discovery",
+      "schema definition",
+      "vol.Schema",
+      "data entry flow",
+      "flow handler",
+      "FlowResult",
+      "async_show_form",
+      "async_create_entry"
+    ],
+    "file_patterns": [
+      "**/homeassistant/components/**/config_flow.py",
+      "**/tests/components/**/test_config_flow.py"
+    ],
+    "contexts": [
+      "configuration flow",
+      "user setup",
+      "integration configuration",
+      "discovery flow",
+      "options flow"
+    ]
+  },
+
+  "ha-coordinator-knowledge": {
+    "_description": "Activates for DataUpdateCoordinator work",
+    "prompt_patterns": [
+      "coordinator",
+      "DataUpdateCoordinator",
+      "update coordinator",
+      "polling",
+      "data update",
+      "refresh data",
+      "update interval",
+      "coordinator entity",
+      "CoordinatorEntity",
+      "update method",
+      "async_update_data"
+    ],
+    "file_patterns": [
+      "**/homeassistant/components/**/coordinator.py",
+      "**/homeassistant/components/**/__init__.py"
+    ],
+    "contexts": [
+      "data polling",
+      "coordinator pattern",
+      "data refresh",
+      "polling integration"
+    ]
+  },
+
+  "ha-common-mistakes": {
+    "_description": "Activates for troubleshooting and best practices",
+    "prompt_patterns": [
+      "error",
+      "issue",
+      "problem",
+      "not working",
+      "best practice",
+      "avoid",
+      "anti-pattern",
+      "blocking",
+      "async issue",
+      "common mistake",
+      "pitfall"
+    ],
+    "file_patterns": [
+      "**/homeassistant/components/**/*.py"
+    ],
+    "contexts": [
+      "debugging",
+      "troubleshooting",
+      "code review",
+      "best practices"
+    ]
+  }
+}
