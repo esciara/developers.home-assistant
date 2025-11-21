@@ -51,14 +51,13 @@ This plan enhances the Claude Code workflow (research → plan → implement) fo
 - **Understanding the system first?** → [System Architecture](architecture/overview.md)
 
 **Implementation Phases:**
-1. [Phase 1: Skills Creation](phases/phase-1-skills.md) (8-12h) - **Start here**
-2. [Phase 2: Specialized Commands](phases/phase-2-commands.md) (6-8h)
-3. [Phase 3: Validation Sub-agent](phases/phase-3-validator.md) (4-6h)
-
-**Total Estimated Effort:** 18-26 hours (MVP: 8-12 hours)
+1. [Phase 1: Skills Creation](phases/phase-1-skills.md) (12-16h) - **Start here**
+2. [Phase 2: Specialized Commands](phases/phase-2-commands.md) (8-12h)
+3. [Phase 3: Validation Sub-agent](phases/phase-3-validator.md) (6-10h)
 
 ### 📐 Architecture & Design
 
+Understanding how everything fits together:
 - [System Architecture Overview](architecture/overview.md) - Component model and interaction
 - [Component Interaction Model](architecture/component-interaction.md) - Skills → Commands → Agents flow
 
@@ -100,6 +99,8 @@ This plan enhances the Claude Code workflow (research → plan → implement) fo
 │   ├── ha-entity-knowledge/
 │   ├── ha-config-flow-knowledge/
 │   ├── ha-coordinator-knowledge/
+│   ├── ha-testing-patterns/     # NEW - Testing requirements & templates
+│   ├── ha-quality-scale/        # NEW - HA quality framework
 │   └── ha-common-mistakes/
 │
 ├── commands/            # Workflows (user-invoked)

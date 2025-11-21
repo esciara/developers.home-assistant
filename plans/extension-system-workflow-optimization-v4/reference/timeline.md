@@ -9,8 +9,8 @@
 | Approach | Duration | Deliverables |
 |----------|----------|--------------|
 | **MVP** | 12-15h | 1 Skill + 1 Command |
-| **Full Implementation** | 26-38h | 5 Skills + 3 Commands + Validator |
-| **Phase 1 Only** | 12-16h | 5 Skills |
+| **Full Implementation** | 32-46h | 7 Skills + 3 Commands + Validator |
+| **Phase 1 Only** | 18-24h | 7 Skills |
 
 ---
 
@@ -36,11 +36,11 @@
 
 ---
 
-## Full Implementation Timeline (26-38 hours)
+## Full Implementation Timeline (32-46 hours)
 
 **Best for:** Complete workflow optimization
 
-### Phase 1: Knowledge Skills Creation (12-16h)
+### Phase 1: Knowledge Skills Creation (18-24h)
 
 | Activity | Hours | Notes |
 |----------|-------|-------|
@@ -48,12 +48,14 @@
 | ha-integration-structure | 2-3h | Straightforward |
 | ha-config-flow-knowledge | 3-4h | Complex flows |
 | ha-coordinator-knowledge | 2-3h | Focused patterns |
+| ha-testing-patterns | 3-4h | **NEW - CRITICAL** Testing templates & coverage |
+| ha-quality-scale | 2-3h | **NEW - CRITICAL** HA quality framework |
 | ha-common-mistakes | 2-3h | Collection of anti-patterns |
 | Testing & validation | 1-2h | Across all Skills |
 | Documentation | 1h | Guides and README |
 
 **Deliverables:**
-- ✅ 5 Skills with clear SKILL.md descriptions
+- ✅ 7 Skills with clear SKILL.md descriptions
 - ✅ Skills auto-activate properly
 - ✅ Documentation complete
 
