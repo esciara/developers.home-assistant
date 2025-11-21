@@ -110,20 +110,39 @@ Create the `ha-config-flow-knowledge` Skill that automatically activates when de
 │   ├── test-patterns.md              # Config flow testing patterns
 │   ├── test-templates.py             # Test templates for different flows
 │   └── coverage-guide.md             # Achieving 100% coverage
-├── requirements-checklist.md         # Complete requirements reference
-└── README.md                         # Usage and activation guide
+└── requirements-checklist.md         # Complete requirements reference
 ```
 
 ### 2. SKILL.md Content
 
+**YAML Frontmatter (Required):**
+```yaml
+---
+name: ha-config-flow-knowledge
+description: Provides comprehensive Home Assistant config flow implementation guidance including patterns, templates, and testing strategies. Use when creating or refactoring config flows, implementing async_step methods, handling user/discovery/options flows, or working with config_flow.py files.
+---
+```
+
+**Frontmatter Requirements:**
+- `name`: Must use lowercase, numbers, hyphens only (max 64 chars)
+- `description`: Max 1024 chars, written in **third person** (not "I help" or "You can")
+- `description` must include: what the skill does + when to use it + key trigger terms
+
+**SKILL.md Body (Max 500 lines):**
+SKILL.md serves as navigation/overview, NOT full content dump. Points to detailed files as needed.
+
 **Required Sections:**
-- **Description**: Clear, specific description triggering auto-activation
-- **Purpose**: One-sentence use case statement
-- **What This Skill Provides**: Complete list of embedded content
-- **Quick Start Guide**: How to use the skill effectively
-- **Content Organization**: Overview of directory structure and what's in each file
-- **Common Workflows**: Step-by-step guides for common tasks
-- **When to Use What**: Decision tree for navigating skill content
+- **Overview**: Brief explanation of config flow patterns (assumes Claude knows Python/HA basics)
+- **Quick Start**: Most common scenario with minimal example
+- **Content Organization**: Clear map to reference files (e.g., "For error handling, see [patterns/error-handling.md]")
+- **Common Workflows**: High-level steps, details in separate files
+- **Navigation Guide**: Decision tree for finding right content
+
+**Progressive Disclosure Pattern:**
+- Keep SKILL.md concise - under 500 lines
+- Move detailed patterns to patterns/*.md
+- Move code examples to templates/*.py
+- Reference files one level deep only (avoid nested references)
 
 ### 3. Pattern Documents (patterns/ directory)
 
@@ -195,12 +214,17 @@ Create the `ha-config-flow-knowledge` Skill that automatically activates when de
 ### 6. Testing & Validation
 
 **Activation Tests:**
+
+Note: Skills activate automatically based on context. Test by asking questions that match the description, then observe if skill activates.
+
 - [ ] Activation on prompt "How do I create a config flow?"
 - [ ] Activation on prompt "async_step_user pattern"
 - [ ] Activation on prompt "config entry validation"
-- [ ] Activation when opening `config_flow.py`
-- [ ] Activation when opening `test_config_flow.py`
-- [ ] No false positives (doesn't activate inappropriately)
+- [ ] Activation on prompt "implementing reauthentication flow"
+- [ ] Activation on prompt "100% config flow test coverage"
+- [ ] Activation when working with files named `config_flow.py`
+- [ ] Activation when working with files named `test_config_flow.py`
+- [ ] No false positives (doesn't activate for entity/coordinator/other topics)
 
 **Content Completeness Tests:**
 - [ ] All common config flow patterns covered
@@ -218,134 +242,13 @@ Create the `ha-config-flow-knowledge` Skill that automatically activates when de
 
 ### 7. Documentation
 
-**README.md in Skill directory:**
-- What this Skill provides
-- Complete table of contents for all embedded content
-- When it activates
-- How to navigate and use the skill effectively
-- Quick start guide for common tasks
-- Examples of activation
-
-**Lessons Learned Document:**
+**Lessons Learned Document** (stored outside skill directory in `plans/increments/`):
 - What worked well
 - What content gaps were identified
 - Content organization effectiveness
 - Recommendations for next Skills
 - Activation refinements needed
 - Optimal content structure insights
-
----
-
-## Implementation Plan
-
-### Phase 1: Preparation & Content Extraction (3-4 hours)
-
-**Activities:**
-1. Review existing research documents thoroughly
-2. Extract all config flow-related content from research docs
-3. Review HA core integration examples for real-world patterns
-4. Review v3 ha-config-flow-knowledge spec for reference
-5. Set up `.claude/skills/` directory structure
-6. Plan content organization and file structure
-
-**Deliverables:**
-- Extracted content organized by topic
-- List of HA core integrations to use as examples
-- Directory structure created
-- Content organization plan
-
-### Phase 2: Core Skill Documents (4-5 hours)
-
-**Activities:**
-1. Write SKILL.md with clear activation description and navigation guide
-2. Create all pattern documents (flow-types, step-patterns, error-handling, schema-definitions, authentication)
-3. Build comprehensive requirements checklist
-4. Write README with content overview and navigation guide
-
-**Deliverables:**
-- Complete SKILL.md with activation criteria
-- All 5 pattern documents in patterns/ directory
-- requirements-checklist.md
-- README.md
-
-**Key Decisions:**
-- Activation trigger specificity (balance false positives vs false negatives)
-- Content depth (how detailed to make each pattern)
-- Organization structure (how to group related content)
-
-### Phase 3: Code Templates & Examples (4-5 hours)
-
-**Activities:**
-1. Create 4 complete code templates (basic, discovery, options, multi-step)
-2. Write detailed inline comments and guidance in each template
-3. Extract and annotate real-world examples from HA core integrations
-4. Create common scenarios document with solutions
-5. Verify all templates are syntactically correct and follow current HA patterns
-
-**Deliverables:**
-- 4 working Python templates in templates/ directory
-- real-world-examples.md with annotated examples
-- common-scenarios.md with solutions
-
-### Phase 4: Testing Content & Guides (2-3 hours)
-
-**Activities:**
-1. Create testing pattern documents
-2. Write test templates matching flow templates
-3. Create coverage achievement guide
-4. Document mocking strategies for external APIs
-
-**Deliverables:**
-- Complete testing/ directory with all documents
-- Test templates for each flow type
-- Comprehensive testing guidance
-
-### Phase 5: Validation & Refinement (2-3 hours)
-
-**Activities:**
-1. Run activation tests with various prompts
-2. Test file-based activation
-3. Verify content completeness (can implement without external docs)
-4. Test templates compile and work correctly
-5. Refine SKILL.md description if needed
-6. Check all cross-references are accurate
-
-**Deliverables:**
-- Test results documentation
-- Refined SKILL.md (if adjustments needed)
-- Validation report
-- Content completeness verification
-
-### Phase 6: Real-World Trial (2-3 hours)
-
-**Activities:**
-1. Apply Skill to actual config flow development work
-2. Document activation behavior
-3. Verify all needed info is available within skill
-4. Identify any content gaps requiring external docs
-5. Measure effectiveness (time to info, workflow smoothness)
-6. Gather qualitative feedback
-
-**Deliverables:**
-- Trial report with gap analysis
-- Effectiveness metrics
-- User experience notes
-- Content improvement recommendations
-
-### Phase 7: Documentation & Handoff (1-2 hours)
-
-**Activities:**
-1. Document lessons learned
-2. Document optimal content organization patterns
-3. Create recommendations for next increments
-4. Update main plan if needed
-5. Prepare for increment 02 planning
-
-**Deliverables:**
-- Lessons learned document
-- Content organization best practices
-- Recommendations for subsequent Skills
-- Updated timeline estimates for remaining work
 
 ---
 
@@ -481,37 +384,6 @@ Create the `ha-config-flow-knowledge` Skill that automatically activates when de
 
 ---
 
-## Timeline
-
-### Condensed Timeline (3-4 days full-time)
-
-| Day | Activities | Hours |
-|-----|------------|-------|
-| 1 | Phase 1: Preparation & Content Extraction | 3-4 |
-| 2 | Phase 2: Core Documents + Start Phase 3: Templates | 4-5 |
-| 3 | Complete Phase 3 + Phase 4: Testing Content | 4-5 |
-| 4 | Phase 5: Validation + Phase 6: Trial + Phase 7: Documentation | 4-5 |
-
-**Total:** 15-19 hours over 3-4 days
-
-### Extended Timeline (2 weeks part-time)
-
-| Week | Day | Activities | Hours |
-|------|-----|------------|-------|
-| 1 | Mon | Phase 1: Preparation & Content Extraction | 3-4 |
-| 1 | Tue | Phase 2: Start Core Documents | 2-3 |
-| 1 | Wed | Phase 2: Complete Core Documents | 2-3 |
-| 1 | Thu | Phase 3: Start Templates | 2-3 |
-| 1 | Fri | Phase 3: Complete Templates & Examples | 2-3 |
-| 2 | Mon | Phase 4: Testing Content | 2-3 |
-| 2 | Tue | Phase 5: Validation & Refinement | 2-3 |
-| 2 | Wed | Phase 6: Real-World Trial | 2-3 |
-| 2 | Thu | Phase 7: Documentation & Handoff | 1-2 |
-
-**Total:** 18-25 hours over 2 weeks
-
----
-
 ## Metrics & Measurement
 
 ### Quantitative Metrics
@@ -555,38 +427,10 @@ Create the `ha-config-flow-knowledge` Skill that automatically activates when de
 
 ---
 
-## Next Increments Preview
-
-### Increment 02: ha-entity-knowledge Skill
-**Estimated:** 12-16 hours
-**Focus:** Self-contained entity implementation guidance, unique ID strategies, device info patterns
-**Content:** Entity patterns, templates for different entity types, testing guidance, real-world examples
-
-### Increment 03: ha-coordinator-knowledge Skill
-**Estimated:** 10-14 hours
-**Focus:** Self-contained DataUpdateCoordinator usage guidance
-**Content:** Coordinator patterns, templates, update interval strategies, error handling
-
-### Increment 04: ha-integration-structure Skill
-**Estimated:** 8-12 hours
-**Focus:** Self-contained integration file structure and manifest guidance
-**Content:** Required files checklist, manifest patterns, directory structure templates
-
-### Increment 05: ha-common-mistakes Skill
-**Estimated:** 8-12 hours
-**Focus:** Self-contained anti-patterns and best practices
-**Content:** Common pitfalls, quality scale requirements, async patterns, unique ID issues
-
-### Increment 06+: Commands & Sub-agents
-**Focus:** Workflow orchestration commands that leverage the self-contained Skills
-
----
-
 ## References
 
 ### Planning Documents
 - [Extension System Workflow Optimization Plan v4](../extension-system-workflow-optimization-v4/README.md) - Overall system vision
-- [v3 ha-config-flow-knowledge Spec](../extension-system-workflow-optimization-v3/implementation/skills/ha-config-flow-knowledge.md) - Original concept (now adapted for self-contained approach)
 
 ### Research Documents (Source Material for Content Extraction)
 - New Integrations: `thoughts/shared/research/2025-11-20-home-assistant-integration-skill-research.md` (Section 2: Configuration Flows)
@@ -597,39 +441,6 @@ Create the `ha-config-flow-knowledge` Skill that automatically activates when de
 - Data Entry Flow Architecture: `docs/data_entry_flow_index.md`
 - Config Flow Testing: `docs/development_testing.md`
 
-### Related Files
-- `.claude/skills/` - Skills directory location
-- `plans/increments/` - This document's location
-
----
-
-## Approval & Sign-off
-
-**Created:** 2025-11-21
-**Author:** Claude Code Workflow Optimization Team
-**Status:** Ready for Execution
-
-**Review Checklist:**
-- [ ] Scope is clear and focused
-- [ ] Deliverables are well-defined
-- [ ] Timeline is realistic
-- [ ] Success criteria are measurable
-- [ ] Risks are identified and mitigated
-- [ ] Dependencies are documented
-- [ ] Next steps are clear
-
-**Approved by:** [Pending]
-**Date:** [Pending]
-
----
-
-## Execution Notes
-
-This section will be updated during execution with:
-- Actual time spent per phase
-- Deviations from plan
-- Unexpected challenges
-- Quick wins
-- Recommendations for next increment
-
-**[To be filled during execution]**
+### Claude Skills Documentation
+- Overview: `claude-skills-docs/overview.md`
+- Authoring Best Practices: `claude-skills-docs/authoring-best-practices.md`
