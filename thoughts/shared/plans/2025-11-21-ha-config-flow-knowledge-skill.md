@@ -11,8 +11,6 @@ Create the `ha-config-flow-knowledge` Claude Code Skill as a comprehensive, self
   - File: `thoughts/shared/research/2025-11-21-ha-config-flow-skill-implementation-research.md`
 - ✅ Clear increment plan with defined deliverables and success criteria
   - File: `plans/increments/increment-01-config-flow-skill.md`
-- ✅ Existing skill example for structure reference
-  - File: `.claude/skills/python-development/SKILL.md`
 - ✅ Skill authoring best practices documentation
   - Files: `claude-skills-docs/overview.md`, `claude-skills-docs/authoring-best-practices.md`
 
@@ -801,7 +799,6 @@ N/A - This is a new skill, not migrating existing functionality.
 - **Research Document**: `thoughts/shared/research/2025-11-21-ha-config-flow-skill-implementation-research.md`
 - **Skill Best Practices**: `claude-skills-docs/authoring-best-practices.md`
 - **Skill Overview**: `claude-skills-docs/overview.md`
-- **Example Skill**: `.claude/skills/python-development/SKILL.md`
 
 ---
 
